@@ -1,0 +1,58 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "2DE9C8846D9375EAACFABA8963120E8E7719BAF5",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "5C3A8CDA5E958C03C8E8E4C674FD32B019D96FDB" : 0,
+    "C4A4227C90560D4A126D81E16DDDB4026E9182E4" : 0,
+    "2DE9C8846D9375EAACFABA8963120E8E7719BAF5" : 0,
+    "95F70890EFD46183734FEDFE52CF53391DE6937E" : 0,
+    "7C75E5447B54AFC055976419C9380FDE67C4DE83" : 0,
+    "B5F3D620D2F13AC2C7903BA66B0B5C48E357C763" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "5FC1C838-4F98-4783-88C6-A792AFE1DE41",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "5C3A8CDA5E958C03C8E8E4C674FD32B019D96FDB" : "openFrameworks\/addons\/ofxGuiExtended\/",
+    "C4A4227C90560D4A126D81E16DDDB4026E9182E4" : "openFrameworks\/addons\/ofxAssets\/",
+    "2DE9C8846D9375EAACFABA8963120E8E7719BAF5" : "openFrameworks\/",
+    "95F70890EFD46183734FEDFE52CF53391DE6937E" : "openFrameworks\/addons\/ofxPostProcessing\/",
+    "7C75E5447B54AFC055976419C9380FDE67C4DE83" : "openFrameworks\/addons\/ofxAppUtils\/",
+    "B5F3D620D2F13AC2C7903BA66B0B5C48E357C763" : "openFrameworks\/addons\/ofxSortableList\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "deBug",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "apps\/myApps\/deBug\/deBug.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/openframeworks\/openFrameworks.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2DE9C8846D9375EAACFABA8963120E8E7719BAF5"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/frauzufall\/ofxGuiExtended.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5C3A8CDA5E958C03C8E8E4C674FD32B019D96FDB"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/danomatika\/ofxAppUtils.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7C75E5447B54AFC055976419C9380FDE67C4DE83"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/leozimmerman\/ofxPostProcessing.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "95F70890EFD46183734FEDFE52CF53391DE6937E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/frauzufall\/ofxSortableList.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B5F3D620D2F13AC2C7903BA66B0B5C48E357C763"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/elliotwoods\/ofxAssets.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C4A4227C90560D4A126D81E16DDDB4026E9182E4"
+    }
+  ]
+}
