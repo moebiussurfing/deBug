@@ -17,12 +17,11 @@ public:
 
     ofApp *mainApp = (ofApp *)ofxGetAppPtr();
     
-    ofxGuiPanel *scene08Panel;
     ofxGuiGroup *scene08Group;
     
     ofParameter<int> sphereResolution;
     ofParameter<float> sphereRadius;
-    ofParameter<bool> isFilled, isWireframe, hasNormalsDrawn, hasAxesDrawn, hasLightsDrawn, hasFacesSplit;
+    ofParameter<bool> isFilled, isWireframe;
     
 //--------------------------------------------------------------
     // set the scene name through the base class initializer
@@ -38,31 +37,15 @@ public:
         sphereRadius.set("Sphere Radius", ofGetWidth()/3, 0.0, ofGetWidth());
         sphereResolution.set("Sphere Resolution", 4, 0, 6);
         isFilled.set("Fill", true);
-        isWireframe.set("Wireframe  w", false);
-        hasNormalsDrawn.set("Normals  <", false);
-        hasAxesDrawn.set("Axes  \\", false);
-        hasLightsDrawn.set("Lights  l", false);
-        hasFacesSplit.set("Split Faces  / : " + hasFacesSplit, false);
+        isWireframe.set("Wireframe", false);
         
-        scene08Panel = mainApp->gui.addPanel("Scene 08", ofJson({{"flex-direction", "row"}, {"flex-wrap", "wrap"}}));
-        scene08Panel->loadTheme("assets/themes/theme_bleurgh.json");
-        
-        scene08Panel->setPosition(ofGetWidth()-330, 0);
-        scene08Panel->setShowHeader(false);
-        
-        scene08Group = scene08Panel->addGroup("Scene 08");
-        
+        scene08Group = mainApp->menuScenePanel->addGroup("Scene 08");
         scene08Group->add(sphereRadius);
         scene08Group->add(sphereResolution);
         scene08Group->add(isFilled);
-        scene08Group->add(isWireframe);
-        scene08Group->add(hasNormalsDrawn);
-        scene08Group->add(hasAxesDrawn);
-        scene08Group->add(hasLightsDrawn);
-        scene08Group->add(hasFacesSplit);
         
         // scene's panel starts off hidden
-        scene08Panel->getVisible().set(false);
+        scene08Group->getVisible().set(false);
         
         
     }
@@ -78,7 +61,11 @@ public:
         }
         
         // scene's panel gets shown
-        scene08Panel->getVisible().set(true);
+        scene08Group = mainApp->menuScenePanel->addGroup("Scene 08");
+        scene08Group->add(sphereRadius);
+        scene08Group->add(sphereResolution);
+        scene08Group->add(isFilled);
+        scene08Group->add(isWireframe);
         
         // fade scene calculates normalized alpha value for us
         ofxFadeScene::updateEnter();
@@ -104,11 +91,8 @@ public:
         // called on first exit update
         if(isExitingFirst()) {
             ofLogNotice("Scene 08") << "update exit";
-//            scene08Gui->setVisible(false);
+            scene08Group->getVisible().set(false); // scene's panel gets hidden
         }
-        
-        // scene's panel gets hidden
-        scene08Panel->getVisible().set(false);
         
         // fade scene calculates normalized alpha value for us
         ofxFadeScene::updateExit();
@@ -139,18 +123,6 @@ public:
                 break;
             case ';':
                 isWireframe = !isWireframe;
-                break;
-
-            case ',':
-                hasNormalsDrawn = !hasNormalsDrawn;
-                break;
-                break;
-            case '\\':
-                hasAxesDrawn = !hasAxesDrawn;
-                break;
-                
-            case 'l':
-                hasLightsDrawn = !hasLightsDrawn;
                 break;
         }
     }

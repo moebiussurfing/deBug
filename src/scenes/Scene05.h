@@ -28,7 +28,6 @@ public:
     
     float time;
     
-    ofxGuiPanel *scene05Panel;
     ofxGuiGroup *scene05Group;
     
     ofParameter<int> sphereResolution;
@@ -49,19 +48,13 @@ public:
         isFilled.set("Fill", true);
         isWireframe.set("Wireframe  w", true);
         
-        scene05Panel = mainApp->gui.addPanel("Scene 05", ofJson({{"flex-direction", "row"}, {"flex-wrap", "wrap"}}));
-        scene05Panel->loadTheme("assets/themes/theme_bleurgh.json");
-        
-        scene05Panel->setPosition(ofGetWidth()-330, 0);
-        scene05Panel->setShowHeader(false);
-        
-        scene05Group = scene05Panel->addGroup("Scene 05");
+        scene05Group = mainApp->menuScenePanel->addGroup("Scene 05");
         
         scene05Group->add(sphereRadius);
         scene05Group->add(sphereResolution);
         
         // scene's panel starts off hidden
-        scene05Panel->getVisible().set(false);
+        scene05Group->getVisible().set(false);
         
         planet = sphere.getMesh();
         
@@ -78,7 +71,7 @@ public:
         }
         
         // scene's panel gets shown
-        scene05Panel->getVisible().set(true);
+        scene05Group->getVisible().set(true);
         
         // fade scene calculates normalized alpha value for us
         ofxFadeScene::updateEnter();
@@ -111,7 +104,7 @@ public:
         }
         
         // scene's panel gets hidden
-        scene05Panel->getVisible().set(false);
+        scene05Group->getVisible().set(false);
         
         // fade scene calculates normalized alpha value for us
         ofxFadeScene::updateExit();

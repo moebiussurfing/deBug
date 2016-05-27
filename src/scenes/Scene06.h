@@ -44,7 +44,7 @@ class Scene06 : public ofxFadeScene {
 			}
 		
 //            // scene's panel gets shown
-//            scene06Panel->getVisible().set(true);
+//            scene06Group->getVisible().set(true);
             
 			// fade scene calculates normalized alpha value for us
 			ofxFadeScene::updateEnter();
@@ -72,7 +72,7 @@ class Scene06 : public ofxFadeScene {
 			}
 			
 //            // scene's panel gets hidden
-//            scene06Panel->getVisible().set(false);
+//            scene06Group->getVisible().set(false);
             
 			// fade scene calculates normalized alpha value for us
 			ofxFadeScene::updateExit();

@@ -28,14 +28,13 @@ void ofApp::setup() {
     activeName.set("element name", "");
     activeIndex.set("element index", -1);
     
-    ofSetWindowShape(1920, 1200);
     ofSetWindowPosition(ofGetScreenWidth()/2 - ofGetWidth()/2, 0);
     
+    ttFont12.load("assets/fonts/NewMediaFett.ttf", 12);
+    ttFont16.load("assets/fonts/NewMediaFett.ttf", 16);
     
-    ttFont12 = font("NewMediaFett.ttf", 12);
-    ttFont16 = font("NewMediaFett.ttf", 16);
-    //    ttFont.load("assets/fonts/NewMediaFett.ttf", 12);
-    //     font("fontName", 30).drawString("...", 10, 10);
+    setupGui();
+    setupPanels();
     
     // setup the render size (working area)
     transformer.setRenderSize(ofGetWidth(), ofGetHeight());
@@ -64,7 +63,7 @@ void ofApp::setup() {
     
     // start with a specific scene
     // set now to true in order to ignore the scene fade and change now
-    sceneManager.gotoScene("Scene 01", true);
+    sceneManager.gotoScene("Scene05 Wireframe", true);
     lastScene = sceneManager.getCurrentSceneIndex();
     
     // overlap scenes when transitioning
@@ -106,7 +105,6 @@ void ofApp::setup() {
     maxSpectralComp = 40.0;
     maxDct = 300.0;
     
-    setupGui();
     
     guiShow = true;
     guiPlay = true;
@@ -134,7 +132,7 @@ void ofApp::update() {
 #endif
     
     if (guiPlay) {
-        updateGui();
+        updatePanels();
     }
     
     if (guiShow) {
@@ -143,6 +141,7 @@ void ofApp::update() {
         menuCameraPanel->getVisible().set(true);
         menuEffectsPanel->getVisible().set(true);
         menuSettingsPanel->getVisible().set(true);
+        menuScenePanel->getVisible().set(true);
         menuBarPanel->getVisible().set(true);
         scenesPanel->getVisible().set(true);
         
@@ -152,6 +151,7 @@ void ofApp::update() {
         menuCameraPanel->getVisible().set(false);
         menuEffectsPanel->getVisible().set(false);
         menuSettingsPanel->getVisible().set(false);
+        menuScenePanel->getVisible().set(false);
         menuBarPanel->getVisible().set(false);
         scenesPanel->getVisible().set(false);
     }
@@ -195,16 +195,24 @@ void ofApp::draw() {
         cam.orbit( longitude, latitude, radius, ofPoint(0,0,0) );
     }
     
+    for (unsigned i = 0; i < post.size(); ++i)
+    {
+        if (post[i]->getEnabled()) ofSetColor(0, 255, 255);
+        else ofSetColor(255, 0, 0);
+        ostringstream oss;
+        oss << i << ": " << post[i]->getName() << (post[i]->getEnabled()?" (on)":" (off)");
+        ofDrawBitmapString(oss.str(), 10, 20 * (i + 2));
+    }
     
     // drop out of the auto transform space back to OF screen space
     transformer.pop();
     
-    //	#ifdef HAVE_OFX_GUI
-    //		// draw the transform panel when in debug mode
-    //		if(isDebug()) {
-    //			panel.draw();
-    //		}
-    //	#endif
+    	#ifdef HAVE_OFX_GUI
+    		// draw the transform panel when in debug mode
+    		if(isDebug()) {
+    			panel.draw();
+    		}
+    	#endif
     
     // then go back to the auto transform space
     //
@@ -283,57 +291,56 @@ void ofApp::setupGui(){
     cleanUpPanelsButton.set("Clean Panels");
     quitButton.set("quit");
     
-    //////  Panel Setup
-    
     gui.setupFlexBoxLayout();
-    
+}
+
+void ofApp::setupPanels(){
+
     menuAudioPanel = gui.addPanel("AUDIO FACTORY");
     menuAudioPanel->loadTheme("assets/themes/theme_bleurgh.json");
     
     menuAudioPanel->setPosition(0,0);
-    menuAudioPanel->setShowHeader(false);
     
     
-    //////  Custom element styling. TODO: move to theme
+    //////  Custom element styling.
     
-    ofJson toggleTheme = {{"show-name", false}, {"width", "10%"}};
-    ofJson postToggleTheme = {{"fill-color", "rgba(220,80,50,0.5)"}, {"width", "90%"}};
-    ofJson postToggle2Theme = {{"fill-color", "rgba(220,80,50,0.5)"}, {"width", "45%"}};
-    ofJson groupTheme = {{"flex-direction", "row"}, {"flex-wrap", "wrap"}, {"width", 320}, {"align-content", "space-between"}};
+    ofJson tenPercent = {{"width", "10%"}, {"show-name", false}};
+    ofJson ninetyPercent = {{"width", "90%"},{"fill-color", "rgba(220,80,50,0.5)"}};
+    ofJson fourtyFivePercent = {{"width", "45%"},{"fill-color", "rgba(220,80,50,0.5)"}};
     
     //////  Groups
     
     menuAudioGroup = menuAudioPanel->addGroup("Audio Analyzer");
     
-    powerGroup = menuAudioGroup->addGroup("POWER", groupTheme);
-    powerGroup->add(energyToggleVal, toggleTheme);
-    powerGroup->add(energyMultiplierSliderVal, postToggle2Theme);
-    powerGroup->add(intenSmoothSliderVal, postToggle2Theme);
+    powerGroup = menuAudioGroup->addGroup("POWER");
+    powerGroup->add(energyToggleVal, tenPercent);
+    powerGroup->add(energyMultiplierSliderVal, fourtyFivePercent);
+    powerGroup->add(intenSmoothSliderVal, fourtyFivePercent);
     powerGroup->add<ofxGuiValuePlotter>(energySliderVal);
     powerGroup->add(rmsSliderVal);
     powerGroup->minimize();
     
-    pitchGroup = menuAudioGroup->addGroup("PITCH", groupTheme);
-    pitchGroup->add(pitchToggleVal, toggleTheme);
-    pitchGroup->add(pitchSmoothSliderVal, postToggleTheme);
+    pitchGroup = menuAudioGroup->addGroup("PITCH");
+    pitchGroup->add(pitchToggleVal, tenPercent);
+    pitchGroup->add(pitchSmoothSliderVal, ninetyPercent);
     pitchGroup->add<ofxGuiValuePlotter>(pitchPlotterVal);
     pitchGroup->add(pitchConfSliderVal);
     pitchGroup->add(salienceSliderVal);
     //    pitchGroup->add(tuningSliderVal);
     pitchGroup->minimize();
     
-    beatGroup = menuAudioGroup->addGroup("BEAT", groupTheme);
-    beatGroup->add(beatToggleVal, toggleTheme);
-    beatGroup->add(onsetAlphaSliderVal, postToggle2Theme);
-    beatGroup->add(onsetThresholdSliderVal, postToggle2Theme);
+    beatGroup = menuAudioGroup->addGroup("BEAT");
+    beatGroup->add(beatToggleVal, tenPercent);
+    beatGroup->add(onsetAlphaSliderVal, fourtyFivePercent);
+    beatGroup->add(onsetThresholdSliderVal, fourtyFivePercent);
     beatGroup->add(onsetHfcSliderVal);
     beatGroup->add(onsetComplexSliderVal);
     beatGroup->add(onsetFluxSliderVal);
     
-    beatGroup->add(onsetsToggleVal, ofJson({{"type", "radio"}, {"height", 60}}));
+    beatGroup->add(onsetsToggleVal, ofJson({{"type", "radio"}, {"height", 60}, {"fill-color", "rgba(220,80,50,0.9)"}}));
     beatGroup->minimize();
     
-    melodyGroup = menuAudioGroup->addGroup("MELODY", groupTheme);
+    melodyGroup = menuAudioGroup->addGroup("MELODY");
     melodyGroup->add(melodyToggleVal);
     melodyGroup->add<ofxGuiValuePlotter>(spectrumPlotterVal);
     melodyGroup->add<ofxGuiValuePlotter>(melBandsPlotterVal);
@@ -341,9 +348,9 @@ void ofApp::setupGui(){
     melodyGroup->add<ofxGuiValuePlotter>(hpcpPlotterVal);
     melodyGroup->minimize();
     
-    spectralGroup = menuAudioGroup->addGroup("SPECTRAL", groupTheme);
-    spectralGroup->add(spectralToggleVal, toggleTheme);
-    spectralGroup->add(specSmoothSliderVal, postToggleTheme);
+    spectralGroup = menuAudioGroup->addGroup("SPECTRAL");
+    spectralGroup->add(spectralToggleVal, tenPercent);
+    spectralGroup->add(specSmoothSliderVal, ninetyPercent);
     spectralGroup->add<ofxGuiValuePlotter>(hfcPlotterVal);
     spectralGroup->add<ofxGuiValuePlotter>(centroidPlotterVal);
     spectralGroup->add<ofxGuiValuePlotter>(specCmplxPlotterVal);
@@ -356,10 +363,9 @@ void ofApp::setupGui(){
     
     //// 1st Menu Dropdown (CAMERA)
     
-    menuCameraPanel = gui.addPanel("Camera", ofJson({{"width", 200}, {"border-color", "rgba(0,0,0,0.0)"}}));
+    menuCameraPanel = gui.addPanel("Camera Menu", ofJson({{"border-color", "rgba(0,0,0,0.0)"}}));
     menuCameraPanel->loadTheme("assets/themes/theme_bleurgh.json");
     menuCameraPanel->setPosition(menuAudioPanel->getShape().getTopRight()+ofPoint(0,0));
-    menuCameraPanel->setShowHeader(false);
     
     menuCameraGroup = menuCameraPanel->addGroup("Camera", ofJson({{"background-color", "rgba(0,0,0,0.2)"}}));
     menuCameraGroup->add(cameraDistance);
@@ -368,18 +374,20 @@ void ofApp::setupGui(){
     
     //// 2nd Menu Dropdown (EFFECTS)
     
-    menuEffectsPanel = gui.addPanel("Effects", ofJson({{"width", 200}, {"border-color", "rgba(0,0,0,0.0)"}}));
+    menuEffectsPanel = gui.addPanel("Effects Menu", ofJson({{"border-color", "rgba(0,0,0,0.0)"}}));
     menuEffectsPanel->loadTheme("assets/themes/theme_bleurgh.json");
     menuEffectsPanel->setPosition(menuCameraPanel->getShape().getTopRight()+ofPoint(0,0));
-    menuEffectsPanel->setShowHeader(false);
-    menuEffectsGroup = menuEffectsPanel->addGroup("Effects", groupTheme);
+    menuEffectsGroup = menuEffectsPanel->addGroup("Effects");
+    
     effect_toggles = menuEffectsGroup->add<ofxSortableList>("Post Processing");
     effect_toggles->add(hasBleachBypass);
     effect_toggles->add(hasBloom);
     effect_toggles->add(hasContrast);
     effect_toggles->add(hasConvolution);
+    effect_toggles->add(hasDofAlt);
     effect_toggles->add(hasDof);
     effect_toggles->add(hasEdge);
+    effect_toggles->add(hasFakeSSS);
     effect_toggles->add(hasFxaa);
     effect_toggles->add(hasGodRays);
     effect_toggles->add(hasHorizontalTiltShift);
@@ -389,21 +397,21 @@ void ofApp::setupGui(){
     effect_toggles->add(hasLUT);
     effect_toggles->add(hasNoiseWarp);
     effect_toggles->add(hasPixelate);
+    //    effect_toggles->add(hasRender);
+    effect_toggles->add(hasRGBShift);
+    effect_toggles->add(hasRimHighliting);
+    effect_toggles->add(hasSSAO);
     effect_toggles->add(hasToon);
     effect_toggles->add(hasVerticalTiltShift);
     effect_toggles->add(hasZoomBlur);
-    
-    menuTransformGroup = menuEffectsGroup->addGroup("Transformer", groupTheme);
-    menuTransformGroup->add<ofxGuiLabel>("text without parameter");
-    menuTransformGroup->minimize();
-    menuEffectsGroup->minimize();
+    effect_toggles->minimize();
+    //    menuEffectsGroup->minimize();
     
     //// 3rd Menu Dropdown (SETTINGS)
     
-    menuSettingsPanel = gui.addPanel("Settings", ofJson({{"width", 200}, {"border-color", "rgba(0,0,0,0.0)"}}));
+    menuSettingsPanel = gui.addPanel("Settings", ofJson({{"border-color", "rgba(0,0,0,0.0)"}}));
     menuSettingsPanel->loadTheme("assets/themes/theme_bleurgh.json");
     menuSettingsPanel->setPosition(menuEffectsPanel->getShape().getTopRight()+ofPoint(0,0));
-    menuSettingsPanel->setShowHeader(false);
     
     menuSettingsGroup = menuSettingsPanel->addGroup("Settings", ofJson({{"background-color", "rgba(0,0,0,0.2)"}}));
     menuSettingsGroup->add(showHelp);
@@ -420,7 +428,7 @@ void ofApp::setupGui(){
     menuSettingsGuiPanelsGroup->add(unlockPanels); //  toggle to show or hide header
     menuSettingsGuiPanelsGroup->add(cleanUpPanelsButton); //  toggle to clean panels
     
-    colorParameters.setName("Header Colours");
+    colorParameters.setName("Colours");
     colorParameters.add(color0.set("black",false));
     colorParameters.add(color1.set("orange",false));
     colorParameters.add(color2.set("transparent",false));
@@ -435,11 +443,9 @@ void ofApp::setupGui(){
     
     //// Last Menu Dropdown (SCENE)
     
-    menuScenePanel = gui.addPanel("Scene", ofJson({{"width", ofGetWidth()}}));
-    menuScenePanel->loadTheme("assets/themes/theme_menu.json");
-    menuScenePanel->setPosition(ofGetWidth()-330, 0);
-    menuScenePanel->setShowHeader(false);
-    menuScenePanel->addSpacer(0, 32);
+    menuScenePanel = gui.addPanel("Scene");
+    menuScenePanel->loadTheme("assets/themes/theme_bleurgh.json");
+    menuScenePanel->setPosition(ofGetWidth()-320, 0);
     
     //////  Menubar background hack
     
@@ -450,7 +456,7 @@ void ofApp::setupGui(){
     
     //////  Scenes panel
     
-    scenesPanel = gui.addPanel("Scenes", ofJson({{"width", ofGetWidth()}, {"background-color", "rgba(0,0,0,0.5)"}, {"show-header", false}}));
+    scenesPanel = gui.addPanel("Scenes Menu", ofJson({{"width", ofGetWidth()}, {"background-color", "rgba(0,0,0,0.5)"}, {"show-header", false}}));
     scenesPanel->loadTheme("assets/themes/theme_menu.json");
     scenesPanel->setPosition(0,ofGetHeight()-32);
     scenesPanel->add(sceneName);
@@ -482,7 +488,7 @@ void ofApp::quitApp() {
     ofExit();
 }
 
-void ofApp::updateGui(){
+void ofApp::updatePanels(){
     
 }
 

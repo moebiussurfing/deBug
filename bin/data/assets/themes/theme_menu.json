@@ -8,7 +8,6 @@
             "text-color": "rgba(255,255,255,0.8)",
             "text-padding": 5,
             "font-family": "assets/fonts/NewMediaFett.ttf",
-            "font-size": 10,
             "width": "100%"
         },
         
@@ -37,10 +36,11 @@
         },
         
         "label": {
-            "height": 40,
+            "height": 28,
             "text-color": "rgba(220,80,50,1)",
-            "border-color": "rgba(0,0,0,0)"
+            "border-color": "rgba(0,0,0,0)",
+            "background-color": "rgba(0,0,0,0)"
         }
-      
+        
     }
 }
