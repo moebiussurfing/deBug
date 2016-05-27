@@ -11,13 +11,13 @@
             "text-padding": 5,
             "font-family": "assets/fonts/NewMediaFett.ttf",
             "align-content": "center",
-            "justify-content": "space-around",
-            "width": 320
+            "justify-content": "space-around"
         },
         
         "panel": {
             "show-header": false,
-            "background-color": "rgba(0,0,0,0.3)"
+            "background-color": "rgba(0,0,0,0.3)",
+            "width": 320
         },
         
         "group": {
@@ -32,7 +32,8 @@
             "height": 39,
             "margin": 0,
             "background-color": "rgba(0,0,0,0.2)",
-            "text-color": "rgba(250,250,250,1)"
+            "text-color": "rgba(250,250,250,1)",
+            "width": 322
         },
         
         "slider": {

@@ -417,12 +417,6 @@ void ofApp::setupPanels(){
     menuSettingsGroup->add(showHelp);
     menuSettingsGroup->add(quitButton); //  button to quit app
     
-    labelsGroup = menuSettingsGroup->addGroup("labels");
-    labelsGroup->add(activeName);
-    labelsGroup->add<ofxGuiIntLabel>(activeIndex);
-    labelsGroup->add<ofxGuiLabel>("text without parameter");
-    labelsGroup->minimize();
-    
     menuSettingsGuiGroup = menuSettingsGroup->addGroup("GUI", ofJson({{"background-color", "rgba(0,0,0,0.2)"}}));
     menuSettingsGuiPanelsGroup = menuSettingsGuiGroup->addGroup("Panels", ofJson({{"background-color", "rgba(0,0,0,0.2)"}}));
     menuSettingsGuiPanelsGroup->add(unlockPanels); //  toggle to show or hide header
@@ -437,6 +431,11 @@ void ofApp::setupPanels(){
     colorToggles->add(colorParameters);
     colorToggles->setExclusiveToggles(true);
     colorToggles->minimize();
+    
+    labelsGroup = menuSettingsGuiPanelsGroup->addGroup("Labels Test");
+    labelsGroup->add(activeName);
+    labelsGroup->add<ofxGuiIntLabel>(activeIndex);
+    labelsGroup->minimize();
     
     menuSettingsGuiPanelsGroup->minimize();
     menuSettingsGroup->minimize();
