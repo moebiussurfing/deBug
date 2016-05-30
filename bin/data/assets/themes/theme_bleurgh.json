@@ -11,7 +11,8 @@
             "text-padding": 5,
             "font-family": "assets/fonts/NewMediaFett.ttf",
             "align-content": "center",
-            "justify-content": "space-around"
+            "justify-content": "space-around",
+            "width": "100%"
         },
         
         "panel": {
@@ -25,7 +26,10 @@
             "padding": 0,
             "margin": 0,
             "margin-bottom": 1,
-            "align-content": "space-between"
+            "align-content": "space-between",
+            "flex-direction": "row",
+            "flex-wrap": "wrap",
+            "width": 320
         },
         
         "group-header": {
@@ -46,7 +50,6 @@
         },
         
         "toggle": {
-            "show-name": false,
             "height": 40,
             "background-color": "rgba(220,80,50,0.1)",
             "border-color": "rgba(220,80,50,0.9)",
@@ -63,7 +66,7 @@
         
         "label": {
             "text-color": "rgba(220,80,50,1)",
-            "border-color": "rgba(0,0,0,0)"
+            "border-color": "transparent"
         },
         
         "graphics": {
@@ -73,8 +76,7 @@
         "value-plotter": {
             "fill-color": "rgba(220,80,50,1)",
             "height": 40,
-            "precision": 3,
-            "width": "100%"
+            "precision": 3
         },
         
         "function-plotter": {

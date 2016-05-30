@@ -156,6 +156,15 @@ void ofApp::update() {
         scenesPanel->getVisible().set(false);
     }
     
+    
+//    if (!hasBloom) { post[1]->setEnabled(false);}
+//    for (unsigned i = 0; i < post.size(); ++i)
+//    {
+//        if (i < post.size()) post[i]->setEnabled(!post[i]->getEnabled());
+//    }
+    
+//            oss << i << ": " << post[i]->getName() << (post[i]->getEnabled()?" (on)":" (off)");
+    
 }
 
 //--------------------------------------------------------------
@@ -163,12 +172,12 @@ void ofApp::draw() {
     
     // the current scene is automatically drawn before this function
     
-    //    ofDrawBitmapString(status,400, 20); // Sortable Effect List Debug
+        ofDrawBitmapString(status,400, 60); // Sortable Effect List Debug
     
-    // show the render area edges with a white rect
+    // show the render area edges with an orange rect
     if(isDebug()) {
         ofNoFill();
-        ofSetColor(255);
+        ofSetColor(220,80,50);
         ofSetRectMode(OF_RECTMODE_CORNER);
         ofDrawRectangle(1, 1, getRenderWidth()-2, getRenderHeight()-2);
         ofFill();
@@ -195,13 +204,28 @@ void ofApp::draw() {
         cam.orbit( longitude, latitude, radius, ofPoint(0,0,0) );
     }
     
+
+    
+    
     for (unsigned i = 0; i < post.size(); ++i)
     {
-        if (post[i]->getEnabled()) ofSetColor(0, 255, 255);
-        else ofSetColor(255, 0, 0);
+        if (post[i]->getEnabled()) ofSetColor(0, 255, 255, 1);
+        else ofSetColor(255, 0, 0, 1);
         ostringstream oss;
         oss << i << ": " << post[i]->getName() << (post[i]->getEnabled()?" (on)":" (off)");
-        ofDrawBitmapString(oss.str(), 10, 20 * (i + 2));
+        cout << i << ": " << post[i]->getName() << (post[i]->getEnabled()?" (on)":" (off)") <<endl;
+        ofDrawBitmapString(oss.str(), 200, 60);
+    }
+    
+//    for (unsigned i = 0; i < post.size(); ++i)
+//    {
+//        if (i < post.size()) post[i]->setEnabled(!post[i]->getEnabled());
+//    }
+    
+    if (hasBloom) {
+        post.createPass<BloomPass>()->setEnabled(true);
+    } else {
+//        post[1]->setEnabled(!post[1]->getEnabled());
     }
     
     // drop out of the auto transform space back to OF screen space
@@ -298,7 +322,6 @@ void ofApp::setupPanels(){
 
     menuAudioPanel = gui.addPanel("AUDIO FACTORY");
     menuAudioPanel->loadTheme("assets/themes/theme_bleurgh.json");
-    
     menuAudioPanel->setPosition(0,0);
     
     
@@ -363,7 +386,7 @@ void ofApp::setupPanels(){
     
     //// 1st Menu Dropdown (CAMERA)
     
-    menuCameraPanel = gui.addPanel("Camera Menu", ofJson({{"border-color", "rgba(0,0,0,0.0)"}}));
+    menuCameraPanel = gui.addPanel("Camera Menu", ofJson({{"border-color", "transparent"}}));
     menuCameraPanel->loadTheme("assets/themes/theme_bleurgh.json");
     menuCameraPanel->setPosition(menuAudioPanel->getShape().getTopRight()+ofPoint(0,0));
     
@@ -374,7 +397,7 @@ void ofApp::setupPanels(){
     
     //// 2nd Menu Dropdown (EFFECTS)
     
-    menuEffectsPanel = gui.addPanel("Effects Menu", ofJson({{"border-color", "rgba(0,0,0,0.0)"}}));
+    menuEffectsPanel = gui.addPanel("Effects Menu");
     menuEffectsPanel->loadTheme("assets/themes/theme_bleurgh.json");
     menuEffectsPanel->setPosition(menuCameraPanel->getShape().getTopRight()+ofPoint(0,0));
     menuEffectsGroup = menuEffectsPanel->addGroup("Effects");
@@ -409,7 +432,7 @@ void ofApp::setupPanels(){
     
     //// 3rd Menu Dropdown (SETTINGS)
     
-    menuSettingsPanel = gui.addPanel("Settings", ofJson({{"border-color", "rgba(0,0,0,0.0)"}}));
+    menuSettingsPanel = gui.addPanel("Settings");
     menuSettingsPanel->loadTheme("assets/themes/theme_bleurgh.json");
     menuSettingsPanel->setPosition(menuEffectsPanel->getShape().getTopRight()+ofPoint(0,0));
     
@@ -475,7 +498,7 @@ void ofApp::setupPanels(){
     cleanUpPanelsButton.addListener(this, &ofApp::cleanUpPanels);
     quitButton.addListener(this, &ofApp::quitApp);
     colorToggles->getActiveToggleIndex().addListener(this, &ofApp::setHeaderColors);
-    colorToggles->setActiveToggle(3);
+//    colorToggles->setActiveToggle(3);
     
     ofAddListener(effect_toggles->elementRemoved, this, &ofApp::removed);
     ofAddListener(effect_toggles->elementMoved, this, &ofApp::moved);
