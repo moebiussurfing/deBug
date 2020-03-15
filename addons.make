@@ -1,4 +1,6 @@
 ofxAppUtils
-ofxGuiExtended
+ofxAssets
+ofxGui
+ofxGuiExtended2
 ofxPostProcessing
 ofxSortableList

@@ -28,7 +28,7 @@ public:
     
     float time;
     
-    ofxGuiGroup *scene05Group;
+    ofxGuiGroup2 *scene05Group;
     
     ofParameter<int> sphereResolution;
     ofParameter<int> sphereRadius;
@@ -85,13 +85,13 @@ public:
     // normal update
     void update() {
         
-        vector<ofVec3f>& verts = planet.getVertices();
-        for(unsigned int i = 0; i < verts.size(); i++){
-            verts[i].x += ofSignedNoise(verts[i].x*ofRandom(-1.,1), verts[i].y/ofRandom(-1.,1),verts[i].z/ofRandom(-1.,1), ofGetElapsedTimef());
-            verts[i].y += ofSignedNoise(verts[i].z*ofRandom(-1.,1), verts[i].x/ofRandom(-1.,1),verts[i].y/ofRandom(-1.,1), ofGetElapsedTimef());
-            verts[i].z += ofSignedNoise(verts[i].y*ofRandom(-1.,1), verts[i].z/ofRandom(-1.,1),verts[i].x/ofRandom(-1.,1), ofGetElapsedTimef());
-        }
-        
+//        vector<ofVec3f>& verts = planet.getVertices();
+//        for(unsigned int i = 0; i < verts.size(); i++){
+//            verts[i].x += ofSignedNoise(verts[i].x*ofRandom(-1.,1), verts[i].y/ofRandom(-1.,1),verts[i].z/ofRandom(-1.,1), ofGetElapsedTimef());
+//            verts[i].y += ofSignedNoise(verts[i].z*ofRandom(-1.,1), verts[i].x/ofRandom(-1.,1),verts[i].y/ofRandom(-1.,1), ofGetElapsedTimef());
+//            verts[i].z += ofSignedNoise(verts[i].y*ofRandom(-1.,1), verts[i].z/ofRandom(-1.,1),verts[i].x/ofRandom(-1.,1), ofGetElapsedTimef());
+//        }
+
     }
     
     // called when scene is exiting, this is just a demo and this
@@ -118,18 +118,18 @@ public:
     // draw
     void draw() {
         
-        sphere.setRadius(sphereRadius);
-        sphere.setResolution(sphereResolution);
-        
-        mainApp->post.begin(mainApp->cam);
-        
-        planet.drawWireframe();
-        sphere.drawWireframe();
-        ofSetColor(150,10);
-        planet.drawFaces();
-        ofSetColor(250);
-
-        mainApp->post.end();
+//        sphere.setRadius(sphereRadius);
+//        sphere.setResolution(sphereResolution);
+//        
+//        mainApp->post.begin(mainApp->cam);
+//        
+//        planet.drawWireframe();
+//        sphere.drawWireframe();
+//        ofSetColor(150,10);
+//        planet.drawFaces();
+//        ofSetColor(250);
+//
+//        mainApp->post.end();
 
     }
     

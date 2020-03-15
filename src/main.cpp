@@ -14,7 +14,7 @@
 
 int main() {
     
-    ofSetupOpenGL(1920,1200, OF_WINDOW);			// <-------- setup the GL context
+    ofSetupOpenGL(1280,720, OF_WINDOW);			// <-------- setup the GL context
     
     // this replaces ofRunApp() and kicks off the running of the app
     // with the app utils

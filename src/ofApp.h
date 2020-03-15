@@ -6,7 +6,7 @@
 
 #include "ofMain.h"
 #include "ofxAppUtils.h"
-#include "ofxGuiExtended.h"
+#include "ofxGuiExtended2.h"
 #include "ofxPostProcessing.h"
 #include "ofxSortableList.h"
 #include "ofxAssets.h"
@@ -126,7 +126,7 @@ public:
     ofxGui gui;
     
     ofxGuiPanel *menuAudioPanel, *menuCameraPanel, *menuSettingsPanel, *menuSettingsGuiPanel, *menuEffectsPanel, *menuBarPanel, *menuScenePanel, *scenesPanel;
-    ofxGuiGroup *powerGroup, *beatGroup, *pitchGroup, *melodyGroup, *spectralGroup, *menuAudioGroup, *menuCameraGroup, *menuTransformGroup, *menuSettingsGroup, *menuEffectsGroup, *menuSettingsGuiGroup, *menuSettingsGuiPanelsGroup, *labelsGroup, *scenesGroup;
+    ofxGuiGroup2 *powerGroup, *beatGroup, *pitchGroup, *melodyGroup, *spectralGroup, *menuAudioGroup, *menuCameraGroup, *menuTransformGroup, *menuSettingsGroup, *menuEffectsGroup, *menuSettingsGuiGroup, *menuSettingsGuiPanelsGroup, *labelsGroup, *scenesGroup;
     
     ofParameter<bool> energyToggleVal;
     ofParameter <float> energySliderVal, energyMultiplierSliderVal, intenSmoothSliderVal;
@@ -164,7 +164,7 @@ public:
     
     //color panel
     ofxGuiPanel* colorPanel;
-    ofxGuiGroup *colorToggles;
+    ofxGuiGroup2 *colorToggles;
     
     ofParameterGroup colorParameters;
     ofParameter<bool> color0;

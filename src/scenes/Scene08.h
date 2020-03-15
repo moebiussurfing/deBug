@@ -17,7 +17,7 @@ public:
 
     ofApp *mainApp = (ofApp *)ofxGetAppPtr();
     
-    ofxGuiGroup *scene08Group;
+    ofxGuiGroup2 *scene08Group;
     
     ofParameter<int> sphereResolution;
     ofParameter<float> sphereRadius;

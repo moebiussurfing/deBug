@@ -1,0 +1,28 @@
+
+bin/deBugDebug.app/Contents/Info.plist
+bin/deBugDebug.app/Contents/MacOS/deBugDebug
+deBug.xcodeproj/project.pbxproj
+deBug.xcodeproj/project.xcworkspace/xcshareddata/deBug.xcscmblueprint
+deBug.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+deBug.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+deBug.xcodeproj/project.xcworkspace/xcuserdata/clem.xcuserdatad/UserInterfaceState.xcuserstate
+deBug.xcodeproj/project.xcworkspace/xcuserdata/manumolina.xcuserdatad/UserInterfaceState.xcuserstate
+deBug.xcodeproj/xcshareddata/xcschemes/deBug Debug.xcscheme
+deBug.xcodeproj/xcshareddata/xcschemes/deBug Release.xcscheme
+deBug.xcodeproj/xcuserdata/clem.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+deBug.xcodeproj/xcuserdata/clem.xcuserdatad/xcschemes/xcschememanagement.plist
+openFrameworks-Info.plist
+Project.xcconfig
+.DS_Store
+bin/deBugDebug.app/Contents/Info.plist
+bin/deBugDebug.app/Contents/MacOS/deBugDebug
+deBug.xcodeproj/project.pbxproj
+deBug.xcodeproj/project.xcworkspace/xcshareddata/deBug.xcscmblueprint
+deBug.xcodeproj/project.xcworkspace/xcuserdata/clem.xcuserdatad/UserInterfaceState.xcuserstate
+deBug.xcodeproj/xcshareddata/xcschemes/deBug Debug.xcscheme
+deBug.xcodeproj/xcshareddata/xcschemes/deBug Release.xcscheme
+deBug.xcodeproj/xcuserdata/clem.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+deBug.xcodeproj/xcuserdata/clem.xcuserdatad/xcschemes/xcschememanagement.plist
+openFrameworks-Info.plist
+Project.xcconfig
+bin/deBugDebug.app/Contents/Info.plist
